@@ -1,7 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
 import styled from '@emotion/styled'
 import { useGameStore } from '@/store'
-import type { FallingWord } from '@/types'
 
 const CanvasContainer = styled.div`
   flex: 1;
@@ -21,6 +20,21 @@ interface GameCanvasProps {
   endless?: boolean
 }
 
+// Internal mutable game entity (not frozen by Immer)
+interface GameEntity {
+  id: string
+  x: number
+  y: number
+  width: number
+  height: number
+  word: string
+  typed: string
+  speed: number
+  color: string
+  points: number
+  active: boolean
+}
+
 // Colors for different word types
 const wordColors = [
   '#f87171', // red
@@ -35,14 +49,14 @@ const wordColors = [
 export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<number>()
-  const entitiesRef = useRef<FallingWord[]>([])
+  const animationRef = useRef<number>(undefined)
+  const entitiesRef = useRef<GameEntity[]>([])
   const wordIndexRef = useRef(0)
   const lastSpawnRef = useRef(0)
   const gameStartTimeRef = useRef(Date.now())
 
   const session = useGameStore((state) => state.session)
-  const { updateScore, incrementCombo, breakCombo, recordKeystroke, completeWord, setTimeRemaining, addEntity, removeEntity } = useGameStore()
+  const { updateScore, incrementCombo, breakCombo, recordKeystroke, completeWord, setTimeRemaining } = useGameStore()
 
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 })
 
@@ -68,7 +82,7 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
       ? words[Math.floor(Math.random() * words.length)]
       : words[wordIndexRef.current++]
 
-    const entity: FallingWord = {
+    const entity: GameEntity = {
       id: crypto.randomUUID(),
       x: Math.random() * (dimensions.width - 150) + 50,
       y: -30,
@@ -83,8 +97,7 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
     }
 
     entitiesRef.current.push(entity)
-    addEntity(entity)
-  }, [words, dimensions, endless, addEntity])
+  }, [words, dimensions, endless])
 
   // Game loop
   useEffect(() => {
@@ -129,10 +142,10 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
         ctx.lineTo(x, dimensions.height)
         ctx.stroke()
       }
-      for (let y = 0; y < dimensions.height; y += 50) {
+      for (let gridY = 0; gridY < dimensions.height; gridY += 50) {
         ctx.beginPath()
-        ctx.moveTo(0, y)
-        ctx.lineTo(dimensions.width, y)
+        ctx.moveTo(0, gridY)
+        ctx.lineTo(dimensions.width, gridY)
         ctx.stroke()
       }
 
@@ -146,7 +159,7 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
       entitiesRef.current = entitiesRef.current.filter((entity) => {
         if (!entity.active) return false
 
-        // Update position
+        // Update position - use mutable local object
         entity.y += entity.speed
 
         // Check if word fell off screen
@@ -175,11 +188,11 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
         }
 
         // Draw remaining portion
-        const remaining = entity.word.slice(typedLength)
+        const remainingText = entity.word.slice(typedLength)
         ctx.fillStyle = typedLength > 0 ? '#fbbf24' : '#f8fafc'
         ctx.font = 'bold 20px "Fira Code", monospace'
         const typedWidth = ctx.measureText(entity.typed).width
-        ctx.fillText(remaining, entity.x + typedWidth, entity.y + 8)
+        ctx.fillText(remainingText, entity.x + typedWidth, entity.y + 8)
 
         return true
       })
@@ -209,8 +222,8 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
 
   // Expose entities for typing input
   useEffect(() => {
-    ;(window as any).__gameEntities = entitiesRef.current
-    ;(window as any).__handleKeyPress = (key: string) => {
+    ;(window as unknown as Record<string, unknown>).__gameEntities = entitiesRef.current
+    ;(window as unknown as Record<string, (key: string) => boolean>).__handleKeyPress = (key: string) => {
       const entities = entitiesRef.current
 
       // Find matching word
@@ -228,7 +241,6 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
             entity.active = false
             updateScore(entity.points * (1 + session.combo * 0.1))
             completeWord()
-            removeEntity(entity.id)
           }
 
           return true
@@ -242,10 +254,10 @@ export function GameCanvas({ words, onGameEnd, endless = false }: GameCanvasProp
     }
 
     return () => {
-      delete (window as any).__gameEntities
-      delete (window as any).__handleKeyPress
+      delete (window as unknown as Record<string, unknown>).__gameEntities
+      delete (window as unknown as Record<string, unknown>).__handleKeyPress
     }
-  }, [session.combo, updateScore, incrementCombo, breakCombo, recordKeystroke, completeWord, removeEntity])
+  }, [session.combo, updateScore, incrementCombo, breakCombo, recordKeystroke, completeWord])
 
   return (
     <CanvasContainer ref={containerRef}>
