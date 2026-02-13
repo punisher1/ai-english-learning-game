@@ -1,0 +1,261 @@
+{
+  "levels": [
+    {
+      "id": "1-1",
+      "name": "左手入门",
+      "description": "学习左手指法 (ASDF)",
+      "world": 1,
+      "stage": 1,
+      "mode": "gravity",
+      "difficulty": "easy",
+      "requiredKeys": ["a", "s", "d", "f"],
+      "targetWPM": 20,
+      "targetAccuracy": 80,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 100,
+        "coins": 50,
+        "stars": 1
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "1-2",
+      "name": "右手入门",
+      "description": "学习右手指法 (JKL;)",
+      "world": 1,
+      "stage": 2,
+      "mode": "gravity",
+      "difficulty": "easy",
+      "requiredKeys": ["j", "k", "l", ";"],
+      "targetWPM": 20,
+      "targetAccuracy": 80,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 100,
+        "coins": 50,
+        "stars": 1
+      },
+      "prerequisites": ["1-1"]
+    },
+    {
+      "id": "1-3",
+      "name": "双手配合",
+      "description": "基础键位综合练习",
+      "world": 1,
+      "stage": 3,
+      "mode": "gravity",
+      "difficulty": "easy",
+      "requiredKeys": ["a", "s", "d", "f", "j", "k", "l", ";"],
+      "targetWPM": 25,
+      "targetAccuracy": 85,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 150,
+        "coins": 75,
+        "stars": 1
+      },
+      "prerequisites": ["1-2"]
+    },
+    {
+      "id": "2-1",
+      "name": "上方字母",
+      "description": "QWERTYUIOP 练习",
+      "world": 2,
+      "stage": 1,
+      "mode": "runner",
+      "difficulty": "medium",
+      "requiredKeys": ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+      "targetWPM": 30,
+      "targetAccuracy": 85,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 200,
+        "coins": 100,
+        "stars": 1
+      },
+      "prerequisites": ["1-3"]
+    },
+    {
+      "id": "2-2",
+      "name": "下方字母",
+      "description": "ZXCVBNM 练习",
+      "world": 2,
+      "stage": 2,
+      "mode": "runner",
+      "difficulty": "medium",
+      "requiredKeys": ["z", "x", "c", "v", "b", "n", "m"],
+      "targetWPM": 30,
+      "targetAccuracy": 85,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 200,
+        "coins": 100,
+        "stars": 1
+      },
+      "prerequisites": ["2-1"]
+    },
+    {
+      "id": "2-3",
+      "name": "全字母综合",
+      "description": "所有字母键位混合",
+      "world": 2,
+      "stage": 3,
+      "mode": "runner",
+      "difficulty": "medium",
+      "requiredKeys": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+      "targetWPM": 35,
+      "targetAccuracy": 90,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 250,
+        "coins": 125,
+        "stars": 1
+      },
+      "prerequisites": ["2-2"]
+    },
+    {
+      "id": "3-1",
+      "name": "数字世界",
+      "description": "1234567890 练习",
+      "world": 3,
+      "stage": 1,
+      "mode": "bubble",
+      "difficulty": "hard",
+      "requiredKeys": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+      "targetWPM": 25,
+      "targetAccuracy": 85,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 300,
+        "coins": 150,
+        "stars": 1
+      },
+      "prerequisites": ["2-3"]
+    },
+    {
+      "id": "3-2",
+      "name": "符号天地",
+      "description": "常用符号练习",
+      "world": 3,
+      "stage": 2,
+      "mode": "bubble",
+      "difficulty": "hard",
+      "requiredKeys": ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"],
+      "targetWPM": 20,
+      "targetAccuracy": 80,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 300,
+        "coins": 150,
+        "stars": 1
+      },
+      "prerequisites": ["3-1"]
+    },
+    {
+      "id": "3-3",
+      "name": "综合训练",
+      "description": "字母+数字+符号",
+      "world": 3,
+      "stage": 3,
+      "mode": "bubble",
+      "difficulty": "hard",
+      "requiredKeys": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+      "targetWPM": 40,
+      "targetAccuracy": 90,
+      "timeLimit": 60,
+      "rewards": {
+        "exp": 400,
+        "coins": 200,
+        "stars": 1
+      },
+      "prerequisites": ["3-2"]
+    },
+    {
+      "id": "4-1",
+      "name": "初级BOSS",
+      "description": "简单词汇挑战",
+      "world": 4,
+      "stage": 1,
+      "mode": "boss",
+      "difficulty": "boss",
+      "requiredKeys": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+      "targetWPM": 35,
+      "targetAccuracy": 90,
+      "timeLimit": 90,
+      "bossName": "暗影巨龙",
+      "rewards": {
+        "exp": 500,
+        "coins": 250,
+        "stars": 1
+      },
+      "prerequisites": ["3-3"]
+    },
+    {
+      "id": "4-2",
+      "name": "中级BOSS",
+      "description": "句子打字挑战",
+      "world": 4,
+      "stage": 2,
+      "mode": "boss",
+      "difficulty": "boss",
+      "requiredKeys": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+      "targetWPM": 40,
+      "targetAccuracy": 92,
+      "timeLimit": 120,
+      "bossName": "魔法巫师",
+      "rewards": {
+        "exp": 600,
+        "coins": 300,
+        "stars": 1
+      },
+      "prerequisites": ["4-1"]
+    },
+    {
+      "id": "4-3",
+      "name": "终极BOSS",
+      "description": "综合能力测试",
+      "world": 4,
+      "stage": 3,
+      "mode": "boss",
+      "difficulty": "boss",
+      "requiredKeys": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+      "targetWPM": 50,
+      "targetAccuracy": 95,
+      "timeLimit": 180,
+      "bossName": "终极守护者",
+      "rewards": {
+        "exp": 1000,
+        "coins": 500,
+        "stars": 1
+      },
+      "prerequisites": ["4-2"]
+    }
+  ],
+  "worlds": [
+    {
+      "id": 1,
+      "name": "键盘森林",
+      "description": "学习基础键位 (ASDF JKL;)",
+      "icon": "🌲"
+    },
+    {
+      "id": 2,
+      "name": "字母山谷",
+      "description": "掌握全部字母键位",
+      "icon": "⛰️"
+    },
+    {
+      "id": 3,
+      "name": "数字海洋",
+      "description": "挑战数字与符号",
+      "icon": "🌊"
+    },
+    {
+      "id": 4,
+      "name": "BOSS城堡",
+      "description": "终极挑战",
+      "icon": "🏰"
+    }
+  ]
+}

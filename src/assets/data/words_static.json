@@ -1,0 +1,32 @@
+{
+  "words": {
+    "basic": ["as", "df", "jk", "l;", "asd", "fjk", "lka", "jds", "fjd", "ksl"],
+    "home": ["ask", "dad", "fad", "gal", "had", "lad", "ask", "sad", "all", "fall", "dad", "add", "sass", "lass", "jazz"],
+    "top": ["we", "er", "rt", "ty", "yu", "ui", "io", "op", "wet", "per", "try", "you", "our", "pot", "top", "pop"],
+    "bottom": ["zx", "xc", "cv", "vb", "bn", "nm", "zinc", "vim", "zen", "cave", "maze", "buzz", "jazz"],
+    "all": ["the", "and", "for", "are", "but", "not", "you", "all", "can", "her", "was", "one", "our", "out", "day", "get", "has", "him", "his", "how", "its", "may", "new", "now", "old", "see", "way", "who", "boy", "did", "car", "let", "put", "say", "she", "too", "use"],
+    "numbers": ["123", "456", "789", "012", "345", "678", "901", "111", "222", "333", "444", "555"],
+    "symbols": ["!@#", "$%^", "&*()", "123!", "abc@", "test#"]
+  },
+  "sentences": {
+    "easy": [
+      "asdf jkl;",
+      "asd fgh jkl",
+      "the quick brown",
+      "jump over the",
+      "hello world"
+    ],
+    "medium": [
+      "the quick brown fox",
+      "jumps over the lazy dog",
+      "pack my box with five",
+      "dozen liquor jugs"
+    ],
+    "hard": [
+      "the quick brown fox jumps over the lazy dog",
+      "pack my box with five dozen liquor jugs",
+      "how vexingly quick daft zebras jump",
+      "the five boxing wizards jump quickly"
+    ]
+  }
+}
